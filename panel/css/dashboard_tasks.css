@@ -1,0 +1,29 @@
+.task-options{
+    box-shadow: 0px 0px 25px #00000040;
+}
+
+.task-details{
+    height: 400px;
+}
+
+.task-owner{
+    color: #a7a6a6;
+    font-size: 13px;
+}
+
+.task-header-group{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+}
+
+.task-card .card-link{
+    text-decoration: none;
+}
+
+.task-action-toggle{
+    width: 1.5rem;
+    height: 1.5rem;
+    align-self: baseline;
+}

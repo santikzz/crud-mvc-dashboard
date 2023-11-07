@@ -1,0 +1,14 @@
+.horizonal-divider{
+    border-bottom: 1px solid #c9c9c9;
+    display: flex;
+    justify-content: center;
+    margin: 0 15px;
+}
+
+.horizonal-divider label{
+    top: 12px;
+    color: #7f7f7f;
+    position: relative;
+    background-color: #fff;
+    padding: 0 10px;
+}
