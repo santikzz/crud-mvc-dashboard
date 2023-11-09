@@ -12,6 +12,7 @@ class LicenseController extends DashboardController{
     }
 
     public function showLicenses(){
+        $this->isLoggedIn(); 
         $products = $this->licenseModel->getProducts();
         $licenses = $this->licenseModel->getLicenses();
         $this->view->showLicenses($licenses, $products);

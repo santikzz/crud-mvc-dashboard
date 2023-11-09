@@ -2,5 +2,5 @@ api/
 panel_backup/
 index.html
 panel/templates_c/
-panel/database/database.php
+database/database.php
 panel/ignore/
