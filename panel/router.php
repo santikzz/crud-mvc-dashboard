@@ -5,14 +5,13 @@ ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
 
+require_once '../config.php';
 require_once './libs/router.php';
 
 require_once './controllers/dashboard.controller.php';
 require_once './controllers/license.controller.php';
 require_once './controllers/task.controller.php';
 require_once "./models/task.model.php";
-
-define('BASE_URL', '//' . $_SERVER['SERVER_NAME'] . ':' . $_SERVER['SERVER_PORT'] . dirname($_SERVER['PHP_SELF']) . '/');
 
 $router = new Router();
 

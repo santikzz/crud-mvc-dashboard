@@ -1,7 +1,7 @@
 <IfModule mod_rewrite.c>
 	RewriteEngine On
 
-    RewriteRule ^$ /web/panel/home [L,R=302]
+    # RewriteRule ^$ /web/panel/home [L,R=302]
 
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -9,9 +9,11 @@
     RewriteCond %{REQUEST_FILENAME} -f [OR]
     RewriteCond %{REQUEST_FILENAME} -d
 
+    RewriteRule ^ignore(/.*)?$ - [L]
+
     RewriteRule \.(?:css|js|jpe?g|gif|png|tpl)$ - [L]
     RewriteRule ^(.*)$ router.php?resource=$1 [QSA,L]
 
-    RewriteRule ^ignore(/.*)?$ - [L]
+    
 
 </IfModule>
