@@ -48,4 +48,8 @@ class DashboardView {
         $this->smarty->display("templates/dashboard_licenses.tpl");
     }
 
+    public function showFileManager(){
+        $this->smarty->display("templates/dashboard_filemanager.tpl");
+    }
+
 }

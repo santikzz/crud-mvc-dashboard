@@ -55,8 +55,8 @@ class LicenseModel{
         
         $product_key = Ulid::generate();
 
-        $stmt = $this->db->prepare("INSERT INTO licence (user_id, product_id, product_key, hwid, duration, lifetime, activation_date, status, description, banned) 
-        VALUES (0, :product_id, :product_key, 'none', :duration, :lifetime, 0, 'UNUSED', :description, 0)");
+        $stmt = $this->db->prepare("INSERT INTO licence (created_by, product_id, product_key, hwid, duration, lifetime, activation_date, status, description, banned) 
+        VALUES (1, :product_id, :product_key, 'none', :duration, :lifetime, 0, 'UNUSED', :description, 0)");
         $stmt->execute([
             "product_id" => $product_id,
             "product_key" => $product_key,

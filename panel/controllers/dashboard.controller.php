@@ -42,5 +42,10 @@ class DashboardController{
         $this->view->showLogin();
     }
 
+    public function showFileManager(){
+        $this->isLoggedIn(); 
+        $this->view->showFileManager();
+    }
+
 
 }

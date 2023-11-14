@@ -1,15 +1,20 @@
-body{
-    background-color: rgba(0, 0, 0, .1);
+body {
+    background-color: #e3e3e3 !important;
+    /* background-color: #101010 !important; */
 }
 
-.sidenav{
+.sidenav {
     height: 100vh;
     box-shadow: 0px 0px 25px #00000040;
 }
 
-main{
+main {
     height: -webkit-fill-available;
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+}
+
+.sidenav .logo{
+    width: 100%;
 }

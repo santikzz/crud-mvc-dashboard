@@ -10,6 +10,9 @@
     RewriteCond %{REQUEST_FILENAME} -d
 
     RewriteRule ^ignore(/.*)?$ - [L]
+    RewriteRule ^libs/filemanager.php(/.*)?$ - [L]
+    
+    # RewriteRule ^$ home [QSA,L]
 
     RewriteRule \.(?:css|js|jpe?g|gif|png|tpl)$ - [L]
     RewriteRule ^(.*)$ router.php?resource=$1 [QSA,L]

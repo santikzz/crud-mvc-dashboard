@@ -8,6 +8,14 @@ class APIView
         header('HTTP/1.1 ' . $status . " " . $this->_requestStatus($status));
         echo json_encode($data);
     }
+
+    public function responseRaw($data, $status = 200)
+    {
+        header('Content-type: text/plain');
+        header('HTTP/1.1 ' . $status . " " . $this->_requestStatus($status));
+        echo $data;
+    }
+
     private function _requestStatus($code)
     {
         $status = array(
@@ -18,5 +26,6 @@ class APIView
         );
         return (isset($status[$code])) ? $status[$code] : $status[500];
     }
+
 
 }

@@ -31,10 +31,15 @@ class LicenseAPIController extends APIController
 
             $key = $this->model->getLicenseData($params[":KEY"]);
             $hwid = $params[":HWID"];
+            $product = $params[":PRODUCT"];
 
             if ($key) {
 
                 // ===== expired or banned checks ===== //
+                if ($key->product_name != $product) { // key for invalid product
+                    $this->view->responseRaw("error_invalid_key");
+                    return;
+                }
                 if ($key->banned == 1) { // banned key
                     $this->view->response(["status" => "banned"]);
                     return;
@@ -49,6 +54,11 @@ class LicenseAPIController extends APIController
                 }
                 // ===== end expired or banned checks ===== //
 
+                // ACTIVATE LICENSE IF UNUSED (bind hwid)
+                if ($key->status == "UNUSED") {
+                    $this->model->activateLicense($key->product_key, $hwid);
+                }
+
                 // check if key is lifetime
                 if ($key->lifetime == 1) {
                     $this->view->response(["status" => "valid", "lifetime" => 1, "remaining" => -1, "message" => "LIFETIME"], 200);
@@ -57,12 +67,6 @@ class LicenseAPIController extends APIController
 
                 $seconds_left = $key->activation_date + $key->duration - time(); // calc remaining seconds
                 $time_left = $seconds_left > 0 ? $seconds_left : 0; // check if remaining seconds is > 0
-
-                // if unused, set to used
-                if ($key->status == "UNUSED") {
-                    // $this->view->response(["status" => "valid", "remaining" => $time_left], 200);
-                    $this->model->setLicenseStatus($key->product_key, "USED");
-                }
 
                 if ($time_left == 0) { // time = 0 then set expired
                     $this->view->response(["status" => "expired"], 200);
@@ -79,6 +83,87 @@ class LicenseAPIController extends APIController
                 $this->view->response(["status" => "invalid_key"], 404);
             }
 
+        }
+
+    }
+
+    public function getLegacyLicenseData($params = [])
+    {
+
+        if (isset($_POST["pkey"], $_POST["hwid"], $_POST["product"])) {
+
+            $pkey = $_POST["pkey"];
+            $hwid = $_POST["hwid"];
+            $product = $_POST["product"];
+
+            $key = $this->model->getLicenseData($pkey);
+
+            if ($key) {
+
+                // ===== expired or banned checks ===== //
+                if ($key->product_name != $product) { // key for invalid product
+                    $this->view->responseRaw("error_invalid_key");
+                    return;
+                }
+                if ($key->banned == 1) { // banned key
+                    $this->view->responseRaw("error_hwid_not_allowed");
+                    return;
+                }
+                if ($key->hwid != "none" && $key->hwid != $hwid) { // invalid hwid
+                    $this->view->responseRaw("error_hwid_not_allowed");
+                    return;
+                }
+                if ($key->status == "EXPIRED") { // already expired
+                    $this->view->responseRaw("error_expired_key");
+                    return;
+                }
+                // ===== end expired or banned checks ===== //
+
+
+
+                // ACTIVATE LICENSE IF UNUSED (bind hwid)
+                if ($key->status == "UNUSED") {
+                    $this->model->activateLicense($key->product_key, $hwid);
+
+                    // check if key is lifetime
+                    if ($key->lifetime == 1) {
+                        $this->view->responseRaw("used_valid_key:9999999");
+                        return;
+                    }
+
+                    $seconds_left = $key->duration; // calc remaining seconds
+                    $time_left = $seconds_left > 0 ? $seconds_left : 0; // check if remaining seconds is > 0
+
+                    $this->view->responseRaw("used_valid_key:" . $time_left);
+
+                    return;
+                }
+
+                // check if key is lifetime
+                if ($key->lifetime == 1) {
+                    $this->view->responseRaw("used_valid_key:9999999");
+                    return;
+                }
+
+                $seconds_left = $key->activation_date + $key->duration - time(); // calc remaining seconds
+                $time_left = $seconds_left > 0 ? $seconds_left : 0; // check if remaining seconds is > 0
+
+                if ($time_left == 0) { // time = 0 then set expired
+                    $this->view->responseRaw("error_expired_key");
+                    $this->model->setLicenseStatus($key->product_key, "EXPIRED");
+                    return;
+                }
+
+                // default remaining time
+                $this->view->responseRaw("used_valid_key:" . $time_left);
+
+            } else {
+                // invalid key
+                $this->view->responseRaw("error_invalid_key");
+            }
+
+        }else{
+            $this->view->responseRaw("error_no_data");
         }
 
     }
@@ -107,7 +192,6 @@ class LicenseAPIController extends APIController
         }
 
     }
-
 
     // public function update($params = [])
     // {

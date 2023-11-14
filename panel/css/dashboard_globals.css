@@ -9,6 +9,11 @@
     top: 12px;
     color: #7f7f7f;
     position: relative;
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #e3e3e3;
     padding: 0 10px;
+}
+
+.sidenav.bg-dark{
+    background-color: black !important;
 }

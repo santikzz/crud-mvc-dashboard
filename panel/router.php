@@ -15,13 +15,14 @@ require_once "./models/task.model.php";
 
 $router = new Router();
 
-// DASHBOARD DEFAULTS //
-$router->addRoute('home', 'GET', 'DashboardController', 'showDefault');
+// DASHBOARD //
+$router->addRoute('home',                   'GET', 'DashboardController', 'showDefault');
+$router->addRoute('filemanager',            'GET',  'DashboardController', 'showFileManager');
 
 // USER AUTHENTICATION //
-$router->addRoute('login', 'GET', 'DashboardController', 'showLogin');
-$router->addRoute('logout', 'GET', 'AuthHelper', 'logout');
-$router->addRoute('verify', 'POST', 'AuthHelper', 'verify');
+$router->addRoute('login',                  'GET',  'DashboardController', 'showLogin');
+$router->addRoute('logout',                 'GET',  'AuthHelper', 'logout');
+$router->addRoute('verify',                 'POST', 'AuthHelper', 'verify');
 // $router->addRoute('user/token', 'GET', 'UserAPIController', 'getToken'); // JWT TOKEN
 
 // TASKS //
@@ -34,11 +35,11 @@ $router->addRoute('tasks/delete/:ID',       'GET',  'TaskController', 'deleteTas
 $router->addRoute('tasks/updateTime',       'POST', 'TaskController', 'updateTime');
 $router->addRoute('tasks/statistics',       'GET',  'TaskController', 'showStatistics');
 
-// LICENSES
+// LICENSES //
 $router->addRoute('licenses',               'GET',  'LicenseController', 'showLicenses');
 $router->addRoute('licenses/create',        'POST', 'LicenseController', 'createLicense');
 $router->addRoute('licenses/delete/:ID',    'GET',  'LicenseController', 'deleteLicense');
 $router->addRoute('licenses/getdata/:ID',   'GET',  'LicenseController', 'getLicenceData');
 
-
+// EXECUTE //
 $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

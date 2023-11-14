@@ -95,7 +95,7 @@
     </div>
 </div> {* ================= END DELETE LICENSE MODAL ================= *}
 
-<div class="d-flex flex-column flex-fill m-3">
+<div class="d-flex flex-column flex-fill p-3">
 
 
     <div class="d-flex flex-inline justify-content-between ">
