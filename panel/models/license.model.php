@@ -84,5 +84,29 @@ class LicenseModel{
         echo json_encode($data);
     }
 
+    public function addGame($name){
+        $stmt = $this->db->prepare("INSERT INTO game (name) VALUES (:name)");
+        $stmt->execute(["name" => $name]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function addProduct($game_id, $name){
+        $stmt = $this->db->prepare("INSERT INTO product (game_id, name) VALUES (:game_id, :name)");
+        $stmt->execute(["game_id" => $game_id, "name" => $name]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function deleteGame($id){
+        $stmt = $this->db->prepare("DELETE FROM game WHERE id = :id");
+        $stmt->execute(["id"=> $id]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function deleteProduct($id){
+        $stmt = $this->db->prepare("DELETE FROM product WHERE id = :id");
+        $stmt->execute(["id"=> $id]);
+        return ($stmt->rowCount() > 0);
+    }
+
 }
 

@@ -41,5 +41,11 @@ $router->addRoute('licenses/create',        'POST', 'LicenseController', 'create
 $router->addRoute('licenses/delete/:ID',    'GET',  'LicenseController', 'deleteLicense');
 $router->addRoute('licenses/getdata/:ID',   'GET',  'LicenseController', 'getLicenceData');
 
+$router->addRoute('products',               'GET',  'LicenseController', 'showProducts');
+$router->addRoute('products/addgame',       'POST', 'LicenseController', 'addGame');
+$router->addRoute('products/addproduct',    'POST', 'LicenseController', 'addProduct');
+$router->addRoute('products/deletegame/:ID',    'GET', 'LicenseController', 'deleteGame');
+$router->addRoute('products/deleteproduct/:ID',    'GET', 'LicenseController', 'deleteProduct');
+
 // EXECUTE //
 $router->route($_GET['resource'], $_SERVER['REQUEST_METHOD']);

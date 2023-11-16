@@ -18,15 +18,15 @@
   </script>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"
     integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-  
-    <link rel='stylesheet' type='text/css' media='screen' href='css/dashboard_globals.css'>
+
+  <link rel='stylesheet' type='text/css' media='screen' href='css/dashboard_globals.css'>
 </head>
 
 <body>
 
   <main>
 
-    <div class="sidenav d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+    <div class="sidenav d-flex flex-column flex-shrink-0 p-3 text-white bg-dark fixed-top" style="width: 280px;">
       <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         {* <svg class="bi me-2" width="40" height="32">
           <use xlink:href="#bootstrap"></use>
@@ -57,14 +57,20 @@
         </li>
 
         <li>
-          <a href="tasks/statistics" class="nav-link text-white {if $endpoint eq "statistics"} active {/if}">
-            <i class="fa-solid fa-chart-line"></i> Statistics
+          <a href="products" class="nav-link text-white {if $endpoint eq "products"} active {/if}">
+            <i class="fa-solid fa-table"></i> Products
+          </a>
+        </li>
+        
+        <li>
+          <a href="filemanager" class="nav-link text-white {if $endpoint eq "filemanager"} active {/if}">
+            <i class="fa-solid fa-hard-drive"></i> File manager
           </a>
         </li>
 
         <li>
-          <a href="filemanager" class="nav-link text-white {if $endpoint eq "filemanager"} active {/if}">
-            <i class="fa-solid fa-hard-drive"></i> File manager
+          <a href="tasks/statistics" class="nav-link text-white {if $endpoint eq "statistics"} active {/if}">
+            <i class="fa-solid fa-chart-line"></i> Statistics
           </a>
         </li>
 
