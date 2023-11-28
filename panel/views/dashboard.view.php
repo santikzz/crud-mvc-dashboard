@@ -48,9 +48,10 @@ class DashboardView {
         $this->smarty->display("templates/dashboard_licenses.tpl");
     }
 
-    public function showProducts($games, $products){
+    public function showProducts($games, $products, $public_list){
         $this->smarty->assign("games", $games);
         $this->smarty->assign("products", $products);
+        $this->smarty->assign("public_list", $public_list);
         $this->smarty->display("templates/dashboard_products.tpl");
     }
 

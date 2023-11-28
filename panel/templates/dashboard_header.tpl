@@ -61,7 +61,7 @@
             <i class="fa-solid fa-table"></i> Products
           </a>
         </li>
-        
+
         <li>
           <a href="filemanager" class="nav-link text-white {if $endpoint eq "filemanager"} active {/if}">
             <i class="fa-solid fa-hard-drive"></i> File manager

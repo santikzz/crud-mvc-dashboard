@@ -26,7 +26,8 @@ class LicenseController extends DashboardController
         $this->isLoggedIn();
         $games = $this->licenseModel->getGames();
         $products = $this->licenseModel->getProducts();
-        $this->view->showProducts($games, $products);
+        $public_list = $this->licenseModel->getPublicProductList();
+        $this->view->showProducts($games, $products, $public_list);
     }
 
     public function createLicense()
