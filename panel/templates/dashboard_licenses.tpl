@@ -72,6 +72,90 @@
     </div>
 </div> {* ================= END CREATE LICENSE MODAL ================= *}
 
+{* ================= MODIFY LICENSE MODAL ================= *}
+<div class="modal fade" tabindex="-1" id="modify-key-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-solid fa-key"></i> Modify key</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+        <form method="POST" action="licenses/create">
+                    
+                    <div class="modal-body">
+
+                    <div class="d-flex flex-inline">
+
+                        <div class="left">
+
+                                <div class="mb-3">
+                                    <label class="form-label edit-key-keyholder">#key</label>
+                                    <label class="form-label edit-key-productname">#product</label>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <label class="form-label">Time</label>
+                                    <div class="form-check">
+                                        <input class="form-check-input key-time-radio" type="radio" name="key_time_modifier"
+                                            value="time_hours">
+                                        <label class="form-check-label">
+                                            Hours
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input key-time-radio" type="radio" name="key_time_modifier"
+                                            value="time_days" checked>
+                                        <label class="form-check-label">
+                                            Days
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input key-time-radio" type="radio" name="key_time_modifier"
+                                            value="time_lifetime" id="key-lifetime-checkbox">
+                                        <label class="form-check-label">
+                                            Lifetime
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1"><i class="fa-solid fa-clock"></i></span>
+                                    <input type="number" class="form-control" name="key_time" value="7" id="key-time-input">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label class="form-label">Description</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text" id="basic-addon1"><i
+                                                class="fa-solid fa-note-sticky"></i></span>
+                                        <input type="text" class="form-control" name="key_description" placeholder="@kiroshi">
+                                    </div>
+                                </div>
+
+                        </div>
+
+                        <div class="vr mx-4"></div>
+
+                        <div class="right">
+                                a
+                        </div>
+
+                    </div>
+
+                </div>
+            
+            <div class="modal-footer d-grid modal-btn-large">
+                <button type="submit" class="btn btn-primary"><i class="fa-regular fa-pen-to-square"></i> Confirm</button>
+            </div>
+
+        </form>
+
+        </div>
+    </div>
+</div> {* ================= END MODIFY LICENSE MODAL ================= *}
+
 
 {* ================= DELETE LICENSE MODAL ================= *}
 <div class="modal fade" tabindex="-1" id="delete-key-modal">
@@ -154,9 +238,14 @@
                                 <i class="fa-solid fa-infinity"></i> 
                             {else} 
                                 {if $key->activation_date eq 0}
-                                    n/a 
+                                    --
                                 {else} 
-                                    {($key->activation_date + $key->duration - $current_time)|formatElapsedTime:true:true:false} 
+
+                                    {if ($key->activation_date + $key->duration - $current_time) > 0}
+                                        {($key->activation_date + $key->duration - $current_time)|formatElapsedTime:true:true:false} 
+                                    {else}
+                                        --
+                                    {/if}
                                 {/if} 
                             {/if}
                         </td>
@@ -177,6 +266,8 @@
                                     <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                
+                                    <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#modify-key-modal" id="modify-key-btn"><i class="fa-regular fa-pen-to-square"></i> Modify</a></li>
                                     <li><a class="dropdown-item" href="licenses/resethwid/{$key->id}"><i class="fa-solid fa-rotate-left"></i> Reset HWID</a></li>
                                     <li><a class="dropdown-item" href="licenses/delete/{$key->id}"><i class="fa-solid fa-trash"></i> Delete</a></li>
                                 </ul>

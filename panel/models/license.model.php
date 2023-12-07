@@ -131,5 +131,68 @@ class LicenseModel
         return $stmt->fetchAll(PDO::FETCH_OBJ);
     }
 
+    public function addPublicItem($product_id, $name, $version, $status, $visible, $filename, $size)
+    {
+
+        $stmt = $this->db->prepare("INSERT INTO public_list (name, version, status, filename, product_id, visible, size, pricing) VALUES
+            (:name, :version, :status, :filename, :product_id, :visible, :size, '')
+        ");
+        $stmt->execute(["product_id" => $product_id, "name" => $name, "version" => $version, "status" => $status, "visible" => $visible, "filename" => $filename, "size" => $size]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function getPublicItemId($item_id)
+    {
+        $stmt = $this->db->prepare("SELECT id, name, version, status, filename, product_id, visible, size, pricing FROM public_list WHERE id = :item_id");
+        $stmt->execute(["item_id" => $item_id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+    }
+
+    public function getGameId($item_id)
+    {
+        $stmt = $this->db->prepare("SELECT id, name, image FROM game WHERE id = :item_id");
+        $stmt->execute(["item_id" => $item_id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+    }
+
+    public function getProductId($item_id)
+    {
+        $stmt = $this->db->prepare("SELECT id, game_id, name FROM product WHERE id = :item_id");
+        $stmt->execute(["item_id" => $item_id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+
+    }
+
+    public function updatePublicItem($item_id, $product_id, $name, $version, $status, $visible, $filename, $size){
+    $stmt = $this->db->prepare("UPDATE public_list SET name = :name, version = :version, status = :status, 
+        filename = CASE WHEN :filename <> '' THEN :filename ELSE filename END,
+        size = CASE WHEN :size <> '' THEN :size ELSE size END,
+        product_id = :product_id, visible = :visible
+        WHERE id = :item_id
+    ");
+        $stmt->execute(["item_id" => $item_id, "product_id" => $product_id, "name" => $name, "version" => $version, "status" => $status, "visible" => $visible, "filename" => $filename, "size" => $size]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function updateGameId($id, $name, $image){
+        $stmt = $this->db->prepare("UPDATE game SET name = :name, image = :image WHERE id = :id");
+        $stmt->execute(["id"=>$id, "name" => $name, "image" => $image]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function updateProductId($id, $game_id, $name){
+        $stmt = $this->db->prepare("UPDATE product SET game_id = :game_id, name = :name WHERE id = :id");
+        $stmt->execute(["id"=>$id, "game_id" => $game_id, "name" => $name]);
+        return ($stmt->rowCount() > 0);
+    }
+
+    public function deletePublicItem($id){
+        $stmt = $this->db->prepare("DELETE FROM public_list WHERE id = :id");
+        $stmt->execute(["id" => $id]);
+        return ($stmt->rowCount() > 0);
+    }
+
 }
 

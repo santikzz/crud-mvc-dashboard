@@ -83,32 +83,158 @@ class LicenseController extends DashboardController
         header("Location: " . BASE_URL . "products");
 
     }
-    
-    public function deleteGame($params = []){
+
+    public function deleteGame($params = [])
+    {
         $this->isLoggedIn();
         $id = $params[":ID"];
-        if($id){
+        if ($id) {
             $this->licenseModel->deleteGame($id);
         }
         header("Location: " . BASE_URL . "products");
     }
 
-    public function deleteProduct($params = []){
+    public function deleteProduct($params = [])
+    {
         $this->isLoggedIn();
         $id = $params[":ID"];
-        if($id){
+        if ($id) {
             $this->licenseModel->deleteProduct($id);
         }
         header("Location: " . BASE_URL . "products");
     }
 
-
-    public function editLicense()
+    public function addPublicItem()
     {
         $this->isLoggedIn();
 
+        if (isset($_POST["product_id"], $_POST["name"], $_POST["version"], $_POST["status"], $_POST["visible"])) {
 
+            $product_id = $_POST["product_id"];
+            $name = $_POST["name"];
+            $version = $_POST["version"];
+            $status = $_POST["status"];
+            $visible = $_POST["visible"];
+
+            $filename = "";
+            $size = "0.0 MB";
+
+            if (isset($_FILES["file"])) {
+
+                $filename = basename($_FILES["file"]["name"]);
+                $target_file = UPLOAD_DIR . $filename;
+
+                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+
+                    $size = $_FILES["file"]["size"] / (1024 * 1024); // to MB
+                    $size = number_format((float) $size, 2, '.', '');
+                    $size .= " MB";
+
+                }
+
+            }
+
+            $this->licenseModel->addPublicItem($product_id, $name, $version, $status, $visible, $filename, $size);
+            header("Location: " . BASE_URL . "products");
+        }
 
     }
 
+    public function editPublicItem()
+    {
+        $this->isLoggedIn();
+
+        if (isset($_POST["id"], $_POST["product_id"], $_POST["name"], $_POST["version"], $_POST["status"], $_POST["visible"])) {
+
+            $id = $_POST["id"];
+            $product_id = $_POST["product_id"];
+            $name = $_POST["name"];
+            $version = $_POST["version"];
+            $status = $_POST["status"];
+            $visible = $_POST["visible"];
+
+            $filename = "";
+            $size = "0.0 MB";
+
+            if (isset($_FILES["file"])) {
+
+                $filename = basename($_FILES["file"]["name"]);
+                $target_file = UPLOAD_DIR . $filename;
+
+                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+
+                    $size = $_FILES["file"]["size"] / (1024 * 1024); // to MB
+                    $size = number_format((float) $size, 2, '.', '');
+                    $size .= " MB";
+
+                }
+
+            }
+
+            $this->licenseModel->updatePublicItem($id, $product_id, $name, $version, $status, $visible, $filename, $size);
+            header("Location: " . BASE_URL . "products");
+        }
+
+    }
+
+    public function editGameName()
+    {
+        $this->isLoggedIn();
+        if (isset($_POST["id"], $_POST["name"])) {
+            $id = $_POST["id"];
+            $name = $_POST["name"];
+            // TODO ADD IMAGE SUPPORT
+            $image = "";
+            $this->licenseModel->updateGameId($id, $name, $image);
+        }
+        header("Location: " . BASE_URL . "products");
+    }
+
+    public function editProduct(){
+        $this->isLoggedIn();
+        $this->isLoggedIn();
+        if (isset($_POST["id"], $_POST["game_id"], $_POST["name"])) {
+            $id = $_POST["id"];
+            $game_id = $_POST["game_id"];
+            $name = $_POST["name"];
+            $this->licenseModel->updateProductId($id, $game_id, $name);
+        }
+        header("Location: " . BASE_URL . "products");
+    }
+
+    public function deletePublicItem($params = []){
+        $this->isLoggedIn();
+        $id = $params[":ID"];
+        if ($id) {
+            $this->licenseModel->deletePublicItem($id);
+        }
+        header("Location: " . BASE_URL . "products");
+    }
+
+    public function getPublicItemId($params = [])
+    {
+        $this->isLoggedIn();
+        $id = $params[":ID"];
+        echo json_encode($this->licenseModel->getPublicItemId($id));
+    }
+    
+    public function getGameId($params = [])
+    {
+        $this->isLoggedIn();
+        $id = $params[":ID"];
+        echo json_encode($this->licenseModel->getGameId($id));
+    }
+    
+    public function getProductId($params = [])
+    {
+        $this->isLoggedIn();
+        $id = $params[":ID"];
+        echo json_encode($this->licenseModel->getProductId($id));
+    }
+    
+    public function editLicense()
+    {
+        $this->isLoggedIn();
+        // TODO
+    }
 }
