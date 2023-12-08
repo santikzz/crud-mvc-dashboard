@@ -232,9 +232,17 @@ class LicenseController extends DashboardController
         echo json_encode($this->licenseModel->getProductId($id));
     }
     
-    public function editLicense()
+    public function editLicense($params = [])
     {
         $this->isLoggedIn();
         // TODO
     }
+
+    public function resetHwid($params = []){
+        $this->isLoggedIn();
+        $key_id = $params[":ID"];
+        $this->licenseModel->resetHwid($key_id);
+        header("Location: " . BASE_URL . "licenses");
+    }
+
 }

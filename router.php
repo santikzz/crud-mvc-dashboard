@@ -41,6 +41,7 @@ $router->addRoute('licenses',               'GET',  'LicenseController', 'showLi
 $router->addRoute('licenses/create',        'POST', 'LicenseController', 'createLicense');
 $router->addRoute('licenses/delete/:ID',    'GET',  'LicenseController', 'deleteLicense');
 $router->addRoute('licenses/getdata/:ID',   'GET',  'LicenseController', 'getLicenceData');
+$router->addRoute('licenses/resethwid/:ID',   'GET',  'LicenseController', 'resetHwid');
 
 $router->addRoute('products',               'GET',  'LicenseController', 'showProducts');
 $router->addRoute('products/addgame',       'POST', 'LicenseController', 'addGame');

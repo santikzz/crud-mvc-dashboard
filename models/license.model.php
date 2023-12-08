@@ -194,5 +194,11 @@ class LicenseModel
         return ($stmt->rowCount() > 0);
     }
 
+    public function resetHwid($key_id){
+        $stmt = $this->db->prepare("UPDATE licence SET hwid = 'RESET' WHERE id = :KEY_ID");
+        $stmt->execute(["KEY_ID" => $key_id]);
+        return ($stmt->rowCount() > 0);
+    }
+
 }
 
