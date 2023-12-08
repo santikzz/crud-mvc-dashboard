@@ -230,7 +230,7 @@
 
                     <tr>
                         <td>{$key->product_key}</th>
-                        <td>{if empty($key->hwid)} - not used - {elseif $key->hwid eq "RESET"} <b>- HWID RESET -</b> {else} {$key->hwid} {/if} </td>
+                        <td>{if empty($key->hwid)} -- not used -- {elseif $key->hwid eq "RESET"} <b>-- HWID RESET --</b> {else} {$key->hwid} {/if} </td>
                         <td>{$key->product_name}</td>
                         <td class="text-center">{if $key->lifetime eq 1} LIFETIME {else} {$key->duration|formatElapsedTime:true:false:false} {/if}</td>
                         <td class="text-center">
