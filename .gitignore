@@ -2,3 +2,4 @@ BACKUP/
 database/
 ignore/
 templates_c/
+.git/

@@ -18,6 +18,7 @@ $router = new Router();
 // DASHBOARD //
 $router->addRoute('home',                   'GET', 'DashboardController', 'showDefault');
 $router->addRoute('filemanager',            'GET',  'DashboardController', 'showFileManager');
+$router->addRoute('advanced',            'GET',  'DashboardController', 'showAdvanced');
 
 // USER AUTHENTICATION //
 $router->addRoute('login',                  'GET',  'DashboardController', 'showLogin');

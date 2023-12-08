@@ -59,4 +59,8 @@ class DashboardView {
         $this->smarty->display("templates/dashboard_filemanager.tpl");
     }
 
+    public function showAdvanced(){
+        $this->smarty->display("templates/dashboard_advanced.tpl");
+    }
+
 }

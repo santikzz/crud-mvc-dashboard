@@ -47,5 +47,16 @@ class DashboardController{
         $this->view->showFileManager();
     }
 
+    public function showAdvanced(){
+        $this->isLoggedIn(); 
+        $this->view->showAdvanced();
+    }
+
+    public function purgeGitData(){
+        $this->isLoggedIn(); 
+
+        
+    }
+
 
 }

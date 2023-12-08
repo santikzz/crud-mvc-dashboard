@@ -74,6 +74,12 @@
           </a>
         </li>
 
+        <li>
+          <a href="advanced" class="nav-link text-white {if $endpoint eq "advanced"} active {/if}">
+            <i class="fa-solid fa-screwdriver-wrench"></i> Advanced
+          </a>
+        </li>
+
 
       </ul>
 

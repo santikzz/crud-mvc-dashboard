@@ -11,7 +11,7 @@
 
     RewriteRule ^ignore(/.*)?$ - [L]
     RewriteRule ^libs/filemanager.php(/.*)?$ - [L]
-    # RewriteRule ^$ home [L,R=302]
+    RewriteRule ^$ home [L,R=302]
 
     RewriteRule \.(?:css|js|jpe?g|gif|png|tpl)$ - [L]
     RewriteRule ^(.*)$ router.php?resource=$1 [QSA,L]

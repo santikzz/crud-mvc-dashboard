@@ -217,9 +217,9 @@
                     <th scope="col">KEY</th>
                     <th scope="col">HWID</th>
                     <th scope="col">PRODUCT ID</th>
-                    <th scope="col">DURATION</th>
-                    <th scope="col">TIME LEFT</th>
-                    <th scope="col">STATUS</th>
+                    <th scope="col text-center">DURATION</th>
+                    <th scope="col text-center">TIME LEFT</th>
+                    <th scope="col text-center">STATUS</th>
                     <th scope="col">DESCRIPTION</th>
                     <th scope="col"></th>
                 </tr>
@@ -230,10 +230,10 @@
 
                     <tr>
                         <td>{$key->product_key}</th>
-                        <td>{$key->hwid}</td>
+                        <td>{if empty($key->hwid)} - not used - {elseif $key->hwid eq "RESET"} <b>- HWID RESET -</b> {else} {$key->hwid} {/if} </td>
                         <td>{$key->product_name}</td>
-                        <td>{if $key->lifetime eq 1} LIFETIME {else} {$key->duration|formatElapsedTime:true:false:false} {/if}</td>
-                        <td>
+                        <td class="text-center">{if $key->lifetime eq 1} LIFETIME {else} {$key->duration|formatElapsedTime:true:false:false} {/if}</td>
+                        <td class="text-center">
                             {if $key->lifetime eq 1} 
                                 <i class="fa-solid fa-infinity"></i> 
                             {else} 
@@ -250,7 +250,7 @@
                             {/if}
                         </td>
 
-                        <td><span class="badge 
+                        <td class="text-center"><span class="badge 
                             {if $key->banned eq 1} bg-danger"> Banned {else}
                                 {if $key->status eq "EXPIRED"} bg-warning text-dark"> Expired
                                 {elseif $key->status eq "UNUSED"} bg-success"> Not used
