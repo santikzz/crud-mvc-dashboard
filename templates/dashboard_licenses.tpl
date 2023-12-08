@@ -269,6 +269,7 @@
                                 
                                     <li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#modify-key-modal" id="modify-key-btn"><i class="fa-regular fa-pen-to-square"></i> Modify</a></li>
                                     <li><a class="dropdown-item" href="licenses/resethwid/{$key->id}"><i class="fa-solid fa-rotate-left"></i> Reset HWID</a></li>
+                                    <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="licenses/delete/{$key->id}"><i class="fa-solid fa-trash"></i> Delete</a></li>
                                 </ul>
                             </div>
