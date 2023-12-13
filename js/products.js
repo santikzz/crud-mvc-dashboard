@@ -65,7 +65,7 @@ $(document).ready(function () {
             success: function (json_data) {
 
                 let data = JSON.parse(json_data);
-                console.log(data);
+                // console.log(data);
 
                 $(".edit-product-id").val(data["id"]);
 
@@ -100,6 +100,67 @@ $(document).ready(function () {
             }
         });
     });
+
+    // EDIT PRICING
+
+    function updatePriceTable(json) {
+
+        let table = $(".pricing-table");
+        table.html("");
+        let data = JSON.parse(json);
+
+        $.each(data, function (index, item) {
+            let row = '<tr><td>' + item["duration"] + '</td><td>' + item["price"] + '</td><td>' + item["extra"] + '</td><tr>';
+            table.append(row);
+        });
+
+    }
+
+    $(".edit-pricing-btn").click(function () {
+
+        let item_id = $(this).data('item-id');
+
+        $.ajax({
+            url: `products/getpricing/${item_id}`,
+            type: 'GET',
+            data: {},
+            success: function (json_data) {
+                let data = JSON.parse(json_data);
+
+                $(".edit-price-product-id").val(data["id"]);
+                $(".pricing-product-name").text(data["name"]);
+                $(".price-textarea").val(data["pricing"]);
+
+                updatePriceTable(data["pricing"])
+
+            }
+        });
+
+    });
+
+    $('.price-textarea').bind('input propertychange', function () {
+
+
+        try {
+            updatePriceTable(this.value);
+            $('.price-textarea').addClass("valid-json");
+            $('.price-textarea').removeClass("invalid-json");
+            $('.submit-price-btn').attr("disabled", false);
+        } catch (e) {
+            $('.price-textarea').addClass("invalid-json");
+            $('.price-textarea').removeClass("valid-json");
+            $('.submit-price-btn').attr("disabled", true);
+        }
+
+    });
+
+
+
+
+
+
+
+
 
 
 

@@ -165,8 +165,9 @@ class LicenseModel
 
     }
 
-    public function updatePublicItem($item_id, $product_id, $name, $version, $status, $visible, $filename, $size){
-    $stmt = $this->db->prepare("UPDATE public_list SET name = :name, version = :version, status = :status, 
+    public function updatePublicItem($item_id, $product_id, $name, $version, $status, $visible, $filename, $size)
+    {
+        $stmt = $this->db->prepare("UPDATE public_list SET name = :name, version = :version, status = :status, 
         filename = CASE WHEN :filename <> '' THEN :filename ELSE filename END,
         size = CASE WHEN :size <> '' THEN :size ELSE size END,
         product_id = :product_id, visible = :visible
@@ -176,29 +177,51 @@ class LicenseModel
         return ($stmt->rowCount() > 0);
     }
 
-    public function updateGameId($id, $name, $image){
+    public function updateGameId($id, $name, $image)
+    {
         $stmt = $this->db->prepare("UPDATE game SET name = :name, image = :image WHERE id = :id");
-        $stmt->execute(["id"=>$id, "name" => $name, "image" => $image]);
+        $stmt->execute(["id" => $id, "name" => $name, "image" => $image]);
         return ($stmt->rowCount() > 0);
     }
 
-    public function updateProductId($id, $game_id, $name){
+    public function updateProductId($id, $game_id, $name)
+    {
         $stmt = $this->db->prepare("UPDATE product SET game_id = :game_id, name = :name WHERE id = :id");
-        $stmt->execute(["id"=>$id, "game_id" => $game_id, "name" => $name]);
+        $stmt->execute(["id" => $id, "game_id" => $game_id, "name" => $name]);
         return ($stmt->rowCount() > 0);
     }
 
-    public function deletePublicItem($id){
+    public function deletePublicItem($id)
+    {
         $stmt = $this->db->prepare("DELETE FROM public_list WHERE id = :id");
         $stmt->execute(["id" => $id]);
         return ($stmt->rowCount() > 0);
     }
 
-    public function resetHwid($key_id){
+    public function resetHwid($key_id)
+    {
         $stmt = $this->db->prepare("UPDATE licence SET hwid = 'RESET' WHERE id = :KEY_ID");
         $stmt->execute(["KEY_ID" => $key_id]);
         return ($stmt->rowCount() > 0);
     }
+
+    public function getPricingId($item_id)
+    {
+        $stmt = $this->db->prepare("SELECT c.id, c.pricing, p.name FROM public_list c 
+            LEFT JOIN product p ON c.product_id = p.id
+            WHERE c.id = :item_id
+        ");
+        $stmt->execute(["item_id" => $item_id]);
+        return $stmt->fetch(PDO::FETCH_OBJ);
+    }
+
+    public function updatePricingId($id, $data)
+    {   
+        $stmt = $this->db->prepare("UPDATE public_list SET pricing = :pricing_data WHERE id = :id");
+        $stmt->execute(["id" => $id, "pricing_data" => $data]);
+        return ($stmt->rowCount() > 0);
+    }
+
 
 }
 

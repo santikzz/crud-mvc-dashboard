@@ -35,10 +35,12 @@
                                         <span class="visually-hidden">Toggle Dropdown</span>
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                        <li><a class="dropdown-item edit-game" id="edit-game"
-                                                data-item-id="{$key->id}" data-bs-toggle="modal"
-                                                data-bs-target="#edit-game"><i
+                                        <li><a class="dropdown-item edit-game" id="edit-game" data-item-id="{$key->id}"
+                                                data-bs-toggle="modal" data-bs-target="#edit-game"><i
                                                     class="fa-solid fa-pen-to-square"></i>Edit</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <li><a class="dropdown-item" href="products/deletegame/{$key->id}"><i
                                                     class="fa-solid fa-trash"></i> Delete</a></li>
                                     </ul>
@@ -84,6 +86,9 @@
                                                 data-item-id="{$key->id}" data-bs-toggle="modal"
                                                 data-bs-target="#edit-productid"><i
                                                     class="fa-solid fa-pen-to-square"></i>Edit</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <li><a class="dropdown-item" href="products/deleteproduct/{$key->id}"><i
                                                     class="fa-solid fa-trash"></i> Delete</a></li>
                                     </ul>
@@ -143,15 +148,22 @@
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                         {* <li><a class="dropdown-item" href="{$key->id}"><i class="fa-solid fa-pen-to-square"></i>Edit</a></li> *}
-                                        <li><a class="dropdown-item edit-public-item" id="edit-public-item"
+                                        <li><a class="dropdown-item edit-pricing-btn" data-item-id="{$key->id}"
+                                                data-bs-toggle="modal" data-bs-target="#edit-pricing"><i
+                                                    class="fa-solid fa-dollar-sign"></i>Pricing</a></li>
+                                        <li><a class="dropdown-item edit-public-item"
                                                 data-item-id="{$key->id}" data-bs-toggle="modal"
                                                 data-bs-target="#edit-item"><i
                                                     class="fa-solid fa-pen-to-square"></i>Edit</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
                                         <li><a class="dropdown-item" href="products/deleteitem/{$key->id}"><i
                                                     class="fa-solid fa-trash"></i>Delete</a></li>
 
                                     </ul>
                                 </div>
+
                             </td>
                         </tr>
 

@@ -190,8 +190,8 @@ class LicenseController extends DashboardController
         header("Location: " . BASE_URL . "products");
     }
 
-    public function editProduct(){
-        $this->isLoggedIn();
+    public function editProduct()
+    {
         $this->isLoggedIn();
         if (isset($_POST["id"], $_POST["game_id"], $_POST["name"])) {
             $id = $_POST["id"];
@@ -202,7 +202,8 @@ class LicenseController extends DashboardController
         header("Location: " . BASE_URL . "products");
     }
 
-    public function deletePublicItem($params = []){
+    public function deletePublicItem($params = [])
+    {
         $this->isLoggedIn();
         $id = $params[":ID"];
         if ($id) {
@@ -217,32 +218,51 @@ class LicenseController extends DashboardController
         $id = $params[":ID"];
         echo json_encode($this->licenseModel->getPublicItemId($id));
     }
-    
+
     public function getGameId($params = [])
     {
         $this->isLoggedIn();
         $id = $params[":ID"];
         echo json_encode($this->licenseModel->getGameId($id));
     }
-    
+
     public function getProductId($params = [])
     {
         $this->isLoggedIn();
         $id = $params[":ID"];
         echo json_encode($this->licenseModel->getProductId($id));
     }
-    
+
     public function editLicense($params = [])
     {
         $this->isLoggedIn();
         // TODO
     }
 
-    public function resetHwid($params = []){
+    public function resetHwid($params = [])
+    {
         $this->isLoggedIn();
         $key_id = $params[":ID"];
         $this->licenseModel->resetHwid($key_id);
         header("Location: " . BASE_URL . "licenses");
+    }
+
+    public function getPricingId($params = [])
+    {
+        $this->isLoggedIn();
+        $item_id = $params[":ID"];
+        echo json_encode($this->licenseModel->getPricingId($item_id));
+    }
+
+    public function editPricing($params = [])
+    {
+        $this->isLoggedIn();
+        if (isset($_POST["id"], $_POST["pricing_data"])) {
+            $id = $_POST["id"];
+            $data = $_POST["pricing_data"];
+            $this->licenseModel->updatePricingId($id, $data);
+        }
+        header("Location: " . BASE_URL . "products");
     }
 
 }

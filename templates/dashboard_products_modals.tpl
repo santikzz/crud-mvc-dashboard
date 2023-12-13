@@ -325,3 +325,64 @@
         </div>
     </div>
 </div> {* ================= END DELETE LICENSE MODAL ================= *}
+
+{* ================= EDIT PRICING MODAL ================= *}
+<div class="modal fade" tabindex="-1" id="edit-pricing">
+    <div class="modal-dialog modal-dialog-centered edit-pricing">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fa-solid fa-key"></i> Edit pricing</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="products/editpricing">
+
+                <input type="hidden" name="id" value="-1" class="edit-price-product-id">
+
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label class="form-label pricing-product-name">#product_id_name</label>
+                    </div>
+
+                    <div class="container-fluid h90">
+
+                        <div class="row h-100">
+
+                            <div class="col">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Duration</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Extra</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="pricing-table">
+                                        {* <tr>
+                                        <td>Mark</td>
+                                        <td>Otto</td>
+                                        <td>@mdo</td>
+                                    </tr>*}
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="col">
+                                <textarea name="pricing_data" class="form-control h-100 price-textarea"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-footer d-grid modal-btn-large">
+                    <button type="submit" class="submit-price-btn btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>
+                        Modify</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div> {* ================= END EDIT PRICING MODAL ================= *}
