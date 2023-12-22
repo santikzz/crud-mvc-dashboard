@@ -12,7 +12,7 @@
                         <label class="form-label">Name</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i
-                                    class="fa-solid fa-quote-left"></i></span>
+                                   class="fa-solid fa-quote-left"></i></span>
                             <input type="text" class="form-control" name="name" placeholder="Overwatch 2">
                         </div>
                     </div>
@@ -40,7 +40,7 @@
                         <label class="form-label">Name</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i
-                                    class="fa-solid fa-quote-left"></i></span>
+                                   class="fa-solid fa-quote-left"></i></span>
                             <input type="text" class="form-control edit-game-name" name="name">
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         <label class="form-label">Name</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i
-                                    class="fa-solid fa-quote-left"></i></span>
+                                   class="fa-solid fa-quote-left"></i></span>
                             <input type="text" class="form-control" name="name">
                         </div>
                     </div>
@@ -114,7 +114,7 @@
                         <label class="form-label">Name</label>
                         <div class="input-group">
                             <span class="input-group-text" id="basic-addon1"><i
-                                    class="fa-solid fa-quote-left"></i></span>
+                                   class="fa-solid fa-quote-left"></i></span>
                             <input type="text" class="form-control edit-product-name" name="name">
                         </div>
                     </div>
@@ -137,71 +137,58 @@
                 <h5 class="modal-title"><i class="fa-solid fa-tag"></i> Add new public item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="products/addpublicitem">
+            <form method="POST" action="products/addpublicitem" enctype="multipart/form-data">
                 <div class="modal-body">
 
-                    <div class="d-flex flex-inline flex-fill">
+                    <div class="d-flex flex-column flex-fill">
 
-                        <div class="left">
-
-                            <div class="mb-3">
-                                <label class="form-label">Game / Product ID</label>
-                                <select class="form-select" name="product_id">
-                                    {foreach from=$products item=product}
-                                        <option value="{$product->id}">{$product->game_name} - {$product->product_name}
-                                        </option>
-                                    {/foreach}
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-quote-left"></i></span>
-                                    <input type="text" class="form-control" name="name">
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Version</label>
-                                <input type="text" class="form-control" name="version">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-select" name="status">
-                                    <option value="AVAILABLE" selected>AVAILABLE</option>
-                                    <option value="UNAVAILABLE">UNAVAILABLE</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Visible</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-eye"></i></span>
-                                    <select class="form-select" name="visible">
-                                        <option value="1" selected>YES</option>
-                                        <option value="0">NO</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                        <div class="mb-3">
+                            <label class="form-label">Game / Product ID</label>
+                            <select class="form-select" name="product_id">
+                                {foreach from=$products item=product}
+                                    <option value="{$product->id}">{$product->game_name} - {$product->product_name}
+                                    </option>
+                                {/foreach}
+                            </select>
                         </div>
 
-                        <div class="vr mx-4"></div>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                       class="fa-solid fa-quote-left"></i></span>
+                                <input type="text" class="form-control" name="name">
+                            </div>
+                        </div>
 
-                        <div class="right">
-                            <label class="custum-file-upload" for="file">
-                                <div class="icon">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                </div>
-                                <div class="text">
-                                    <span>Click to upload file</span>
-                                </div>
-                                <input type="file" id="file">
-                            </label>
+                        <div class="mb-3">
+                            <label class="form-label">Version</label>
+                            <input type="text" class="form-control" name="version">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select" name="status">
+                                <option value="AVAILABLE" selected>AVAILABLE</option>
+                                <option value="UNAVAILABLE">UNAVAILABLE</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Visible</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                       class="fa-solid fa-eye"></i></span>
+                                <select class="form-select" name="visible">
+                                    <option value="1" selected>YES</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">File</label>
+                            <input type="file" name="upload_file">
                         </div>
 
                     </div>
@@ -223,73 +210,68 @@
                 <h5 class="modal-title"><i class="fa-solid fa-tag"></i> Modify public item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form method="POST" action="products/editpublicitem">
+            <form method="POST" action="products/editpublicitem" enctype="multipart/form-data">
                 <div class="modal-body">
 
                     <input type="hidden" name="id" value="-1" class="edit-item-id">
 
-                    <div class="d-flex flex-inline flex-fill">
+                    <div class="d-flex flex-column flex-fill">
 
-                        <div class="left">
 
-                            <div class="mb-3">
-                                <label class="form-label">Game / Product ID</label>
-                                <select class="form-select edit-item-productid" name="product_id">
-                                    {foreach from=$products item=product}
-                                        <option value="{$product->id}">{$product->game_name} - {$product->product_name}
-                                        </option>
-                                    {/foreach}
-                                </select>
-                            </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Name</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-quote-left"></i></span>
-                                    <input type="text" class="form-control edit-item-name" name="name">
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Version</label>
-                                <input type="text" class="form-control edit-item-version" name="version">
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Status</label>
-                                <select class="form-select edit-item-status" name="status">
-                                    <option value="AVAILABLE">AVAILABLE</option>
-                                    <option value="UNAVAILABLE">UNAVAILABLE</option>
-                                </select>
-                            </div>
-
-                            <div class="mb-3">
-                                <label class="form-label">Visible</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon1"><i
-                                            class="fa-solid fa-eye"></i></span>
-                                    <select class="form-select edit-item-visible" name="visible">
-                                        <option value="1">YES</option>
-                                        <option value="0">NO</option>
-                                    </select>
-                                </div>
-                            </div>
-
+                        <div class="mb-3">
+                            <label class="form-label">Game / Product ID</label>
+                            <select class="form-select edit-item-productid" name="product_id">
+                                {foreach from=$products item=product}
+                                    <option value="{$product->id}">{$product->game_name} - {$product->product_name}
+                                    </option>
+                                {/foreach}
+                            </select>
                         </div>
 
-                        <div class="vr mx-4"></div>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                       class="fa-solid fa-quote-left"></i></span>
+                                <input type="text" class="form-control edit-item-name" name="name">
+                            </div>
+                        </div>
 
-                        <div class="right">
-                            <label class="custum-file-upload" for="file">
-                                <div class="icon">
-                                    <i class="fa-solid fa-cloud-arrow-up"></i>
-                                </div>
-                                <div class="text">
-                                    <span>Click to upload file</span>
-                                </div>
-                                <input type="file" id="file">
-                            </label>
+                        <div class="mb-3">
+                            <label class="form-label">Version</label>
+                            <input type="text" class="form-control edit-item-version" name="version">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select class="form-select edit-item-status" name="status">
+                                <option value="AVAILABLE">AVAILABLE</option>
+                                <option value="UNAVAILABLE">UNAVAILABLE</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Visible</label>
+                            <div class="input-group">
+                                <span class="input-group-text" id="basic-addon1"><i
+                                       class="fa-solid fa-eye"></i></span>
+                                <select class="form-select edit-item-visible" name="visible">
+                                    <option value="1">YES</option>
+                                    <option value="0">NO</option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                        <div class="mb-3">
+                            <label class="form-label">File</label>
+                            <input type="file" name="upload_file">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="delete_old_file" value="yes">
+                                <label class="form-check-label">Delete old file?</label>
+                            </div>
                         </div>
 
                     </div>

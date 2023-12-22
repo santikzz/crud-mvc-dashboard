@@ -119,17 +119,16 @@ class LicenseController extends DashboardController
             $filename = "";
             $size = "0.0 MB";
 
-            if (isset($_FILES["file"])) {
+            if (isset($_FILES["upload_file"])) {
 
-                $filename = basename($_FILES["file"]["name"]);
+                $file = $_FILES["upload_file"];
+                $filename = basename($file["name"]);
                 $target_file = UPLOAD_DIR . $filename;
 
-                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-
-                    $size = $_FILES["file"]["size"] / (1024 * 1024); // to MB
+                if (move_uploaded_file($file["tmp_name"], $target_file)) {
+                    $size = $file["size"] / (1024 * 1024); // to MB
                     $size = number_format((float) $size, 2, '.', '');
                     $size .= " MB";
-
                 }
 
             }
@@ -156,21 +155,25 @@ class LicenseController extends DashboardController
             $filename = "";
             $size = "0.0 MB";
 
-            if (isset($_FILES["file"])) {
+            if (isset($_FILES["upload_file"])) {
 
-                $filename = basename($_FILES["file"]["name"]);
+                $file = $_FILES["upload_file"];
+                $filename = basename($file["name"]);
                 $target_file = UPLOAD_DIR . $filename;
 
-                if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
-
-                    $size = $_FILES["file"]["size"] / (1024 * 1024); // to MB
+                if (move_uploaded_file($file["tmp_name"], $target_file)) {
+                    $size = $file["size"] / (1024 * 1024); // to MB
                     $size = number_format((float) $size, 2, '.', '');
                     $size .= " MB";
+
+                    if(isset($_POST["delete_old_file"])){
+                        $old_filename = $this->licenseModel->getProductFilename($id);
+                        unlink(UPLOAD_DIR . $old_filename);
+                    }
 
                 }
 
             }
-
             $this->licenseModel->updatePublicItem($id, $product_id, $name, $version, $status, $visible, $filename, $size);
             header("Location: " . BASE_URL . "products");
         }

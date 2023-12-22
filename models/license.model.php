@@ -222,6 +222,11 @@ class LicenseModel
         return ($stmt->rowCount() > 0);
     }
 
+    public function getProductFilename($id){
+        $stmt = $this->db->prepare("SELECT filename FROM public_list WHERE id = :id");
+        $stmt->execute(["id" => $id]);
+        return $stmt->fetch(PDO::FETCH_OBJ)->filename;
+    }
 
 }
 
